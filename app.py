@@ -30,16 +30,31 @@ for index,d in enumerate(dates):
 
 for index,link in enumerate(link_list) :
     print()
+
+    #date
     print(publish_dates[index])
     
     browser.open(link)
 
+    # title
     title = (browser.get_current_page().find("span",class_="block text-grey-darkest text-lg")).text
     print(title)
     
+    #notice_type
     notice_type=(browser.get_current_page().find("h1"))
     if (notice_type is None):
         notice_type = "NOTICE"
         print(notice_type)
     else:
         print(notice_type.text)
+
+    #brief
+    brief_block = browser.get_current_page().find(id="notices")
+    a = brief_block.find_all("span")
+    if (len(a) > 1):
+        brief = title
+        print("Brief: ",brief)
+    else:
+        for b in brief_block:
+            brief = (b.find(lambda tag: tag.name == "span" and tag['class'] == ['block'])).text
+            print("Brief: ",brief)
