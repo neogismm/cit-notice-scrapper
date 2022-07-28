@@ -58,3 +58,6 @@ for index,link in enumerate(link_list) :
         for b in brief_block:
             brief = (b.find(lambda tag: tag.name == "span" and tag['class'] == ['block'])).text
             print("Brief: ",brief)
+
+
+browser.close()
